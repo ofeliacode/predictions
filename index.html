@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+</head>
+<body>
+        <style>
+                #parent {
+	text-align: center;
+}
+#parent > * {
+	margin-bottom: 10px;
+}
+
+#timer {
+	font-size: 18px;
+}
+#text {
+	font-size: 17px;
+	font-style: italic;
+}
+button {
+	padding: 5px 10px;
+	font-size: 15px;
+	cursor: pointer;
+}
+button:not(.active) {
+	display: none;
+}
+        </style>
+        <div id="parent">
+                <p id="test">?</p>
+                <div id="text"></div>
+                <button id="start" class="active">узнать свою судьбу</button>
+                <button id="stop">получить предсказание</button>
+        </div>
+        <script>
+                let text = document.getElementById('text');
+                let stop2 = document.getElementById('stop');
+                let start = document.getElementById('start');
+                start.addEventListener('click', func);
+                function func(){
+                        go();
+                        this.removeAttribute('class');
+                        stop2.setAttribute('class', 'active');
+                        this.removeEventListener('click', func);
+                        stop2.addEventListener('click', func2); 
+                        function func2(){
+                                window.clearInterval(window.timerId);
+                                let str = test.innerHTML;
+                                text.innerHTML = obj[str-1];
+                        }        
+                }
+                function go(){
+			window.timerId = window.setInterval(timer, 100);
+		}
+                function timer(){
+			let test = document.getElementById('test');
+			test.innerHTML = getRandomInt(1,obj.length);
+			func2();
+                          
+		} 
+                function getRandomInt(min, max) {
+                        return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+                          let obj = [
+                                  'сегодня вас ждет удача и успех во всех начинаниях',
+                                  'сегодня вас ждет успех при изучении JavaScript',
+                                  'устройте сегодня себе выходной - пусть весь мир подождет',
+                                  'сегодня хорошая погода +40 градусов',
+                                  'сегодня ты стал фулстак',
+                                  'сегодня ты тимлид',
+                                  'сегодня ты сео',
+                                  'сегодня ты мидл',
+                                  'сегодня ты джун',
+                          ]
+        </script>
+</body>
+</html>
